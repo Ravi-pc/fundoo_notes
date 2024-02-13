@@ -28,7 +28,7 @@ def add_user(user: UserDetails, response: Response, db: Session = Depends(get_db
         db.add(user)
         db.commit()
         token = create_access_token({'user_id': user.id})
-        email_verification(token, user.email)
+        email_verification(token, user.user_name)
         db.refresh(user)
         return {'status': 201, 'message': 'User Added'}
     except IntegrityError as ex:

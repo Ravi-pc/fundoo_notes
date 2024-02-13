@@ -1,5 +1,4 @@
 import json
-
 from fastapi import APIRouter, status, Depends, HTTPException, Response, Request
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import Session

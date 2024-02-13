@@ -1,15 +1,12 @@
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel, Field, EmailStr
 
 
 class UserDetails(BaseModel):
-    user_name: str = Field("", title="Enter the user name")
+    user_name: EmailStr = Field("", title="Enter the user name")
     first_name: str = Field("", title="Enter the First Name", pattern=r'^[A-Z]{1}\D{3,}')
     last_name: str = Field("", title="Enter the Last Name", pattern=r'^[A-Z]{1}\D{3,}')
-    email: EmailStr = Field("", title="Enter the email address")
     password: str = Field("", title="Enter valid Password")
-    location: str = Field("", title="Enter the Location")
-    phone: int = Field("", title="Enter the phone Number")
 
 
 class UserLogin(BaseModel):

@@ -11,6 +11,7 @@
 """
 from fastapi import FastAPI, Security, Depends, Request
 from fastapi.security import APIKeyHeader
+from fastapi.middleware.cors import CORSMiddleware
 from routes.user import router
 from routes.notes import routers
 from routes.labels import router_label
@@ -25,6 +26,14 @@ def add_middleware(request: Request, call_next):
     request_logger(request)
     return response
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 app.include_router(router, prefix='/user')
 app.include_router(routers, prefix='/notes', dependencies=[Security(APIKeyHeader(name='authorization')),
